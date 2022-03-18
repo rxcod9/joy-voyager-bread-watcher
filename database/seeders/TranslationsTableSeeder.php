@@ -1,9 +1,9 @@
 <?php
 
-namespace Joy\VoyagerBreadReplaceKeyword\Database\Seeders;
+namespace Joy\VoyagerBreadWatcher\Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Joy\VoyagerBreadReplaceKeyword\Models\ReplaceKeyword;
+use Joy\VoyagerBreadWatcher\Models\Watcher;
 use TCG\Voyager\Models\DataType;
 use TCG\Voyager\Models\MenuItem;
 use TCG\Voyager\Models\Translation;
@@ -18,7 +18,7 @@ class TranslationsTableSeeder extends Seeder
     public function run()
     {
         $this->dataTypesTranslations();
-        $this->replaceKeywordsTranslations();
+        $this->watchersTranslations();
         $this->menusTranslations();
     }
 
@@ -27,19 +27,19 @@ class TranslationsTableSeeder extends Seeder
      *
      * @return void
      */
-    private function replaceKeywordsTranslations()
+    private function watchersTranslations()
     {
-        // Adding translations for 'replace_keywords'
+        // Adding translations for 'watchers'
         //
-        $cat = ReplaceKeyword::where('name', 'replace-keyword-1')->first();
+        $cat = Watcher::where('name', 'watcher-1')->first();
         if ($cat->exists) {
-            $this->trans('pt', $this->arr(['replace_keywords', 'name'], $cat->id), 'replace-keyword-1');
-            $this->trans('pt', $this->arr(['replace_keywords', 'description'], $cat->id), 'ReplaceKeyword 1');
+            $this->trans('pt', $this->arr(['watchers', 'name'], $cat->id), 'watcher-1');
+            $this->trans('pt', $this->arr(['watchers', 'description'], $cat->id), 'Watcher 1');
         }
-        $cat = ReplaceKeyword::where('name', 'replace-keyword-2')->first();
+        $cat = Watcher::where('name', 'watcher-2')->first();
         if ($cat->exists) {
-            $this->trans('pt', $this->arr(['replace_keywords', 'name'], $cat->id), 'replace-keyword-2');
-            $this->trans('pt', $this->arr(['replace_keywords', 'description'], $cat->id), 'ReplaceKeyword 2');
+            $this->trans('pt', $this->arr(['watchers', 'name'], $cat->id), 'watcher-2');
+            $this->trans('pt', $this->arr(['watchers', 'description'], $cat->id), 'Watcher 2');
         }
     }
 
@@ -55,18 +55,18 @@ class TranslationsTableSeeder extends Seeder
         $_fld = 'display_name_singular';
         $_tpl = ['data_types', $_fld];
         
-        $dtp = DataType::where($_fld, __('joy-voyager-bread-replace-keyword::seeders.data_types.category.singular'))->firstOrFail();
+        $dtp = DataType::where($_fld, __('joy-voyager-bread-watcher::seeders.data_types.category.singular'))->firstOrFail();
         if ($dtp->exists) {
-            $this->trans('pt', $this->arr($_tpl, $dtp->id), 'ReplaceKeyword');
+            $this->trans('pt', $this->arr($_tpl, $dtp->id), 'Watcher');
         }
 
         // Adding translations for 'display_name_plural'
         //
         $_fld = 'display_name_plural';
         $_tpl = ['data_types', $_fld];
-        $dtp = DataType::where($_fld, __('joy-voyager-bread-replace-keyword::seeders.data_types.category.plural'))->firstOrFail();
+        $dtp = DataType::where($_fld, __('joy-voyager-bread-watcher::seeders.data_types.category.plural'))->firstOrFail();
         if ($dtp->exists) {
-            $this->trans('pt', $this->arr($_tpl, $dtp->id), 'ReplaceKeywords');
+            $this->trans('pt', $this->arr($_tpl, $dtp->id), 'Watchers');
         }
     }
 
@@ -78,9 +78,9 @@ class TranslationsTableSeeder extends Seeder
     private function menusTranslations()
     {
         $_tpl = ['menu_items', 'title'];
-        $_item = $this->findMenuItem(__('joy-voyager-bread-replace-keyword::seeders.menu_items.replace_keywords'));
+        $_item = $this->findMenuItem(__('joy-voyager-bread-watcher::seeders.menu_items.watchers'));
         if ($_item->exists) {
-            $this->trans('pt', $this->arr($_tpl, $_item->id), 'ReplaceKeywords');
+            $this->trans('pt', $this->arr($_tpl, $_item->id), 'Watchers');
         }
     }
 

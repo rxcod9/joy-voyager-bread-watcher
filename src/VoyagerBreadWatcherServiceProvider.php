@@ -2,25 +2,25 @@
 
 declare(strict_types=1);
 
-namespace Joy\VoyagerBreadReplaceKeyword;
+namespace Joy\VoyagerBreadWatcher;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
-use Joy\VoyagerBreadReplaceKeyword\Console\Commands\BreadReplaceKeyword;
-use Joy\VoyagerBreadReplaceKeyword\Models\ReplaceKeyword as ModelsReplaceKeyword;
+use Joy\VoyagerBreadWatcher\Console\Commands\BreadWatcher;
+use Joy\VoyagerBreadWatcher\Models\Watcher as ModelsWatcher;
 use TCG\Voyager\Facades\Voyager;
 
 /**
- * Class VoyagerBreadReplaceKeywordServiceProvider
+ * Class VoyagerBreadWatcherServiceProvider
  *
  * @category  Package
- * @package   JoyVoyagerBreadReplaceKeyword
+ * @package   JoyVoyagerBreadWatcher
  * @author    Ramakant Gangwar <gangwar.ramakant@gmail.com>
  * @copyright 2021 Copyright (c) Ramakant Gangwar (https://github.com/rxcod9)
- * @license   http://github.com/rxcod9/joy-voyager-bread-replace-keyword/blob/main/LICENSE New BSD License
- * @link      https://github.com/rxcod9/joy-voyager-bread-replace-keyword
+ * @license   http://github.com/rxcod9/joy-voyager-bread-watcher/blob/main/LICENSE New BSD License
+ * @link      https://github.com/rxcod9/joy-voyager-bread-watcher
  */
-class VoyagerBreadReplaceKeywordServiceProvider extends ServiceProvider
+class VoyagerBreadWatcherServiceProvider extends ServiceProvider
 {
     /**
      * Boot
@@ -29,11 +29,11 @@ class VoyagerBreadReplaceKeywordServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Voyager::useModel('ReplaceKeyword', ModelsReplaceKeyword::class);
+        Voyager::useModel('Watcher', ModelsWatcher::class);
 
         $this->registerPublishables();
 
-        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'joy-voyager-bread-replace-keyword');
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'joy-voyager-bread-watcher');
 
         $this->mapApiRoutes();
 
@@ -41,7 +41,7 @@ class VoyagerBreadReplaceKeywordServiceProvider extends ServiceProvider
 
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
 
-        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'joy-voyager-bread-replace-keyword');
+        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'joy-voyager-bread-watcher');
     }
 
     /**
@@ -62,7 +62,7 @@ class VoyagerBreadReplaceKeywordServiceProvider extends ServiceProvider
      */
     protected function mapApiRoutes(): void
     {
-        Route::prefix(config('joy-voyager-bread-replace-keyword.route_prefix', 'api'))
+        Route::prefix(config('joy-voyager-bread-watcher.route_prefix', 'api'))
             ->middleware('api')
             ->group(__DIR__ . '/../routes/api.php');
     }
@@ -74,7 +74,7 @@ class VoyagerBreadReplaceKeywordServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/voyager-bread-replace-keyword.php', 'joy-voyager-bread-replace-keyword');
+        $this->mergeConfigFrom(__DIR__ . '/../config/voyager-bread-watcher.php', 'joy-voyager-bread-watcher');
 
         if ($this->app->runningInConsole()) {
             $this->registerCommands();
@@ -89,26 +89,26 @@ class VoyagerBreadReplaceKeywordServiceProvider extends ServiceProvider
     protected function registerPublishables(): void
     {
         $this->publishes([
-            __DIR__ . '/../config/voyager-bread-replace-keyword.php' => config_path('joy-voyager-bread-replace-keyword.php'),
+            __DIR__ . '/../config/voyager-bread-watcher.php' => config_path('joy-voyager-bread-watcher.php'),
         ], 'config');
 
         $this->publishes([
-            __DIR__ . '/../resources/views' => resource_path('views/vendor/joy-voyager-bread-replace-keyword'),
+            __DIR__ . '/../resources/views' => resource_path('views/vendor/joy-voyager-bread-watcher'),
         ], 'views');
 
         $this->publishes([
-            __DIR__ . '/../resources/lang' => resource_path('lang/vendor/joy-voyager-bread-replace-keyword'),
+            __DIR__ . '/../resources/lang' => resource_path('lang/vendor/joy-voyager-bread-watcher'),
         ], 'translations');
     }
 
     protected function registerCommands(): void
     {
-        $this->app->singleton('command.joy.voyager.bread-replace-keyword', function () {
-            return new BreadReplaceKeyword();
+        $this->app->singleton('command.joy.voyager.bread-watcher', function () {
+            return new BreadWatcher();
         });
 
         $this->commands([
-            'command.joy.voyager.bread-replace-keyword',
+            'command.joy.voyager.bread-watcher',
         ]);
     }
 }
