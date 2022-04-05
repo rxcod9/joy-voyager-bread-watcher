@@ -18,7 +18,7 @@ class DataTypesTableSeeder extends Seeder
                 'name'                  => 'watchers',
                 'display_name_singular' => __('joy-voyager-bread-watcher::seeders.data_types.watcher.singular'),
                 'display_name_plural'   => __('joy-voyager-bread-watcher::seeders.data_types.watcher.plural'),
-                'icon'                  => 'voyager-bread',
+                'icon'                  => 'voyager-bread voyager-bread-watch voyager-watch',
                 'model_name'            => 'Joy\\VoyagerBreadWatcher\\Models\\Watcher',
                 // 'policy_name'           => 'Joy\\VoyagerBreadWatcher\\Policies\\WatcherPolicy',
                 // 'controller'            => 'Joy\\VoyagerBreadWatcher\\Http\\Controllers\\VoyagerBreadWatcherController',
